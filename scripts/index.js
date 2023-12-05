@@ -16,20 +16,23 @@ function removeCard(nodeElement) {
 };
 
 
-function addCard(cardName, cardLink, removeCard) {
+function addCard({ name, link, removeCard }) {
+    console.log(name);
+    console.log(link);
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
-    cardElement.querySelector('.card__title').textContent = cardName;
+    cardElement.querySelector('.card__title').textContent = name;
     const cardImage = cardElement.querySelector('.card__image');
-    cardImage.src = cardLink;
-    cardImage.alt = cardName;
+    cardImage.src = link;
+    cardImage.alt = name;
     const removeButton = cardElement.querySelector('.card__delete-button');
     removeButton.addEventListener('click', function () { removeCard(cardElement) });
     return cardElement;
 };
 
 
-initialCards.forEach(function (element) {
-    placesList.append(addCard(element.name, element.link, removeCard));
+initialCards.forEach(function ({ name, link }) {
+    console.log(name);
+    placesList.append(addCard({ name, link, removeCard }));
 });
 
 
