@@ -12,8 +12,8 @@ const places = document.querySelector('.places');
 const placesList = places.querySelector('.places__list');
 
 
-function removeCard(card) {
-    card.remove();
+function removeCard(nodeElement) {
+    nodeElement.remove();
 };
 
 
@@ -23,9 +23,10 @@ function addCard(cardName, cardLink, removeCard) {
     cardElement.querySelector('.card__title').textContent = cardName;
     cardElement.querySelector('.card__image').src = cardLink;
     const removeButton = cardElement.querySelector('.card__delete-button');
-    removeButton.addEventListener('click', removeCard(cardElement));
+    removeButton.addEventListener('click',function(){removeCard(cardElement)});
     return cardElement;
 };
+
 
 initialCards.forEach(function (element) {
     placesList.append(addCard(element.name, element.link, removeCard));
