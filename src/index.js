@@ -42,7 +42,7 @@ profileEditButton.addEventListener('click', function () {
     jobInput.value = userDescription.textContent;
 });
 
-function handleFormSubmit(evt) {
+function handleFormProfileSubmit(evt) {
     evt.preventDefault();
     userName.textContent = nameInput.value;
     userDescription.textContent = jobInput.value;
@@ -53,13 +53,13 @@ function addNewCard(evt) {
     evt.preventDefault();
     const name = nameNewPlace.value;
     const link = linkNewPlace.value;
-    placesList.prepend(addCard({ name, link, removeCard, likeCard }));
+    placesList.prepend(addCard({ name, link}));
     nameNewPlace.value = '';
     linkNewPlace.value = '';
     closeModal(evt.target.closest('.popup'));
 }
 
-formElement.addEventListener('submit', handleFormSubmit);
+formElement.addEventListener('submit', handleFormProfileSubmit);
 
 formNewPlace.addEventListener('submit', addNewCard)
 
@@ -80,8 +80,7 @@ popups.forEach((item) => {
 })
 
 initialCards.forEach(function ({ name, link }) {
-    console.log(name);
-    placesList.append(addCard({ name, link, removeCard, likeCard }));
+    placesList.append(addCard({ name, link}));
 });
 
 
