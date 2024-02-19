@@ -13,3 +13,19 @@
   position: relative;
   overflow: hidden;
 }
+
+.card__likes{
+  color: black;
+  text-align: center;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.like__section{
+  display: flex;
+  flex-direction: column;
+  gap:3px;
+}
