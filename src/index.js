@@ -45,15 +45,18 @@ let userTitle="";
 let userAbout = "";
 let userAvatar = "";
 
-enableValidation({
+
+const validationConfig={
     formSelector: ".popup__form",
     inputSelector: ".popup__input",
     submitButtonSelector: ".popup__button",
     inactiveButtonClass: "popup__button_disabled",
     inputErrorClass: "popup__input_type_error",
     errorClass: "popup__error_visible",
-});
+}
 
+
+enableValidation(validationConfig);
 
 function initialUserData() {
     Promise.all([getUserProfile(), getCards()])
@@ -84,22 +87,24 @@ function initialUserData() {
     }
 
 profileAddButton.addEventListener("click", function () {
+    clearValidation(formNewPlace, validationConfig);
     openModal(popupNewCard);
 });
 
 profileEditButton.addEventListener("click", function () {
     nameInput.value = userName.textContent;
     jobInput.value = userDescription.textContent;
-    clearValidation(formElement, {
-        formSelector: ".popup__form",
-        inputSelector: ".popup__input",
-        submitButtonSelector: ".popup__button",
-        inactiveButtonClass: "popup__button_disabled",
-        inputErrorClass: "popup__input_type_error",
-        errorClass: "popup__error_visible",
-    });
+    clearValidation(formElement, validationConfig);
     openModal(popupProfile);
 });
+
+
+profileImage.addEventListener("click", () => {
+    inputUpdateAvatar.value = "";
+    clearValidation(formUpdateAvatar, validationConfig);
+    openModal(popupUpdateAvatar);
+  });
+formUpdateAvatar.addEventListener("submit", updateAvatar);
 
 function handleFormProfileSubmit(evt) {
     evt.preventDefault();
@@ -188,12 +193,7 @@ formElement.addEventListener("submit", handleFormProfileSubmit);
 
 formNewPlace.addEventListener("submit", addNewCard);
 
-profileImage.addEventListener("click", () => {
-    //clearValidation(formUpdateAvatar, enableValidation);
-    inputUpdateAvatar.value = "";
-    openModal(popupUpdateAvatar);
-  });
-formUpdateAvatar.addEventListener("submit", updateAvatar);
+
 
 popupCloseButtons.forEach((item) => {
     item.addEventListener("click", (evt) => {
