@@ -1,36 +1,36 @@
-function onResponce(res){
-    return res.ok ? res.json() : res.json().then((err)=>{Promise.reject(`Ошибка: ${res.status}`)})
-}
+const onResponce = (res) => {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка: ${res.status}`);
+};
+
+const baseUrl="https://nomoreparties.co/v1/cohort-magistr-2/";
+const authToken="5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4"
 
 export const getUserProfile = () => {
-  return fetch(`https://nomoreparties.co/v1/cohort-magistr-2/users/me`, {
+  return fetch(`${baseUrl}users/me`, {
     headers: {
-      authorization: "5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4",
+      authorization: authToken,
     },
   }).then((res)=>onResponce(res));
 };
 
 
 export const getCards = () => {
-  return fetch(`https://nomoreparties.co/v1/cohort-magistr-2/cards`, {
+  return fetch(`${baseUrl}cards`, {
     headers: {
-      authorization: "5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4",
+      authorization: authToken,
+      "Content-Type": "application/json",
     },
-  })
-    .then((res)=>onResponce(res))
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => {
-      console.log("Ошибка: ", err);
-    });
+  }).then((res)=>onResponce(res));
 };
 
 export const updateProfile = (profileName, profileAbout) => {
-  return fetch(`https://nomoreparties.co/v1/cohort-magistr-2/users/me`, {
+  return fetch(`${baseUrl}users/me`, {
     method: "PATCH",
     headers: {
-    authorization: "5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4",
+    authorization: authToken,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -42,10 +42,10 @@ export const updateProfile = (profileName, profileAbout) => {
 };
 
 export const postCard = (dataCard)=>{
-  return fetch(`https://nomoreparties.co/v1/cohort-magistr-2/cards`, {
+  return fetch(`${baseUrl}cards`, {
     method: "POST",
     headers: {
-    authorization: "5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4",
+    authorization: authToken,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -57,10 +57,10 @@ export const postCard = (dataCard)=>{
 }
 
 export const deleteCard = (cardId) => {
-  return fetch(`https://nomoreparties.co/v1/cohort-magistr-2/cards/${cardId}`, {
+  return fetch(`${baseUrl}cards/${cardId}`, {
     method: "DELETE",
     headers: {
-      authorization: "5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4",
+      authorization: authToken,
         "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -71,10 +71,10 @@ export const deleteCard = (cardId) => {
 };
 
 export const apiAddLike = (cardId) => {
-  return fetch(`https://nomoreparties.co/v1/cohort-magistr-2/cards/likes/${cardId}`, {
+  return fetch(`${baseUrl}cards/likes/${cardId}`, {
     method: "PUT",
     headers: {
-      authorization: "5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4",
+      authorization: authToken,
         "Content-Type": "application/json",
     },
   })
@@ -82,10 +82,10 @@ export const apiAddLike = (cardId) => {
 };
 
 export const apiDeleteLike = (cardId) => {
-  return fetch(`https://nomoreparties.co/v1/cohort-magistr-2/cards/likes/${cardId}`, {
+  return fetch(`${baseUrl}cards/likes/${cardId}`, {
     method: "DELETE",
     headers: {
-      authorization: "5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4",
+      authorization: authToken,
         "Content-Type": "application/json",
     },
   })
@@ -93,10 +93,10 @@ export const apiDeleteLike = (cardId) => {
 };
 
 export const apiUpdateAvatar = (avatar) => {
-  return fetch(`https://nomoreparties.co/v1/cohort-magistr-2/users/me/avatar `, {
+  return fetch(`${baseUrl}users/me/avatar `, {
     method: "PATCH",
     headers: {
-      authorization: "5ff08c9f-6c39-4cbe-b4be-5b7c70daa1f4",
+      authorization: authToken,
         "Content-Type": "application/json",
     },
     body: JSON.stringify({

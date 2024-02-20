@@ -8,10 +8,12 @@ export function addCard(card,userId,removeCard,addLike) {
     const cardImage = cardElement.querySelector('.card__image');
     const cardLikes = cardElement.querySelector(".card__likes");
     cardElement.setAttribute("id", card._id);
+    cardElement.setAttribute("owner_id",card.owner._id)
     cardImage.src = card.link;
     cardImage.alt = card.name;
     cardLikes.textContent = card.likes.length;
     const removeButton = cardElement.querySelector('.card__delete-button');
+    const likeButton = cardElement.querySelector('.card__like-button');
     removeButton.addEventListener('click', removeCard);
     if (userId !== card.owner._id) {
         removeButton.remove();
@@ -27,7 +29,6 @@ export function addCard(card,userId,removeCard,addLike) {
         popupImage.alt = card.name;
         popupCaption.textContent = card.name;
     })
-    const likeButton = cardElement.querySelector('.card__like-button');
     likeButton.addEventListener("click", addLike)
     return cardElement;
 };
