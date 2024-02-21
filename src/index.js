@@ -99,7 +99,8 @@ profileAddButton.addEventListener("click", function () {
 });
 
 profileEditButton.addEventListener("click", function () {
-  formEditProfile.reset();
+  nameInput.value = userName.textContent; 
+  jobInput.value = userDescription.textContent;
   clearValidation(formEditProfile, validationConfig);
   openModal(popupProfile);
 });
