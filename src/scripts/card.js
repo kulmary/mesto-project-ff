@@ -1,8 +1,7 @@
-import { openModal } from "./modal";
-import { popupCard, popupImage, popupCaption } from "../index.js"
+
 const cardTemplate = document.querySelector('#card-template').content;
 
-export function addCard(card,userId,removeCard,addLike) {
+export function addCard(card,userId,removeCard,addLike,handleOpenCard) {
     const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
     cardElement.querySelector('.card__title').textContent = card.name;
     const cardImage = cardElement.querySelector('.card__image');
@@ -23,12 +22,9 @@ export function addCard(card,userId,removeCard,addLike) {
           likeButton.classList.add("card__like-button_is-active");
         }
       });
-    cardImage.addEventListener("click", function () {
-        openModal(popupCard);
-        popupImage.src = card.link;
-        popupImage.alt = card.name;
-        popupCaption.textContent = card.name;
-    })
+    cardImage.addEventListener("click",  function () {
+        handleOpenCard(card);
+      })
     likeButton.addEventListener("click", addLike)
     return cardElement;
 };
